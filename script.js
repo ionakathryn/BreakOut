@@ -106,23 +106,25 @@ var drawBall = function()
     brush.closePath();
 };
 
+
+
 var bounceBall = function()
 {
     if( (x - (radius / 2) - secuirty <= 0) || (x + (radius / 2) + secuirty >= gameCanvas.width))
     {
-        xVelocity *= -1;
+        upSpeed *= -1;
     }
     else if (y - (radius / 2) - secuirty <= 0 )
     {
-        yVelocity *= -1;
+        downSpeed *= -1;
     }
     else if (y + (radius / 2) + secuirty >= gameCanvas.height)
     {
         if(x > paddleXPosition - 7 && x < paddleXPosition + paddleWidth + 7)
         {
-            yVelocity *= 1.1;
-            xVelocity *= 1.1;
-            yVelocity *= -1;
+            downSpeed *= 1.1;
+            upSpeed *= 1.1;
+            downSpeed *= -1;
         }
         else
         {
