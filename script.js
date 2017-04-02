@@ -31,8 +31,8 @@ var x = gameCanvas.width / 2;
 var y = gameCanvas.height - 30;
 
 // the speed of the ball
-var xVelocity = 2;
-var yVelocity = -2;
+var upSpeed = 2;
+var downSpeed = -2;
 
 // the radious of the ball
 var radius = 10;
@@ -229,8 +229,11 @@ function draw()
     bounceBall();
     collisionDetection();
     movePaddle();
-    x += xVelocity;
-    y += yVelocity;
+}
+
+function changeSpeed(){
+    x += upSpeed;
+    y += downSpeed;
 }
 
 // start the game and bounce the ball
