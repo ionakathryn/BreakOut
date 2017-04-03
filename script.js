@@ -5,6 +5,8 @@ on the canves
 var gameCanvas = document.getElementById("gameCanvas");
 var brush = gameCanvas.getContext("2d");
 
+brush.fillStyle = "#FF0000";
+
 // Bricks information
 var brickRowCount = 3;
 var brickColumnCount = 5;
@@ -105,6 +107,7 @@ var drawBall = function()
     brush.fill();
     brush.closePath();
 };
+
 
 
 
