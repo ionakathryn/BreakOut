@@ -6,6 +6,7 @@ var gameCanvas = document.getElementById("gameCanvas");
 var brush = gameCanvas.getContext("2d");
 
 brush.fillStyle = "#FF0000";
+brush.strokeStyle="#purple";
 
 // Bricks information
 var brickRowCount = 3;
@@ -33,11 +34,11 @@ var x = gameCanvas.width / 2;
 var y = gameCanvas.height - 30;
 
 // the speed of the ball
-var upSpeed = 2;
-var downSpeed = -2;
+var upSpeed = 1;
+var downSpeed = -1;
 
 // the radious of the ball
-var radius = 10;
+var radius = 20;
 var secuirty = 5;
 
 
@@ -66,8 +67,18 @@ var lives = 3;
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
+document.addEventListener("keyup", onkeyup);
+
+
+
 
 // handling if ( <- or -> ) are hit
+function onkeyup(e){
+    if(e.keyCode == 32){
+        alert("game paused");
+    }
+}
+
 function keyDownHandler(e){
     if(e.keyCode == 39) {
         rightPressed = true;
@@ -98,13 +109,14 @@ function mouseMoveHandler(e)
 
 }
 
-
 // drawing the ball
 var drawBall = function()
 {
     brush.beginPath();
-    brush.arc(x, y, radius, 0, Math.PI * 2);
+    brush.strokeStyle = "purple";
+    brush.arc(x, y, radius, 0, 2 * Math.PI);
     brush.fill();
+    brush.stroke();
     brush.closePath();
 };
 
@@ -177,7 +189,7 @@ function drawBricks() {
                 bricks[c][r].y = brickY;
                 brush.beginPath();
                 brush.rect(brickX, brickY, brickWidth, brickHeight);
-                brush.fillStyle = "#0095DD";
+                brush.fillStyle = defaultColor;
                 brush.fill();
                 brush.closePath();
              }
@@ -185,6 +197,7 @@ function drawBricks() {
         }
     }
 }
+
 
 
 function collisionDetection(){
@@ -225,8 +238,9 @@ var drawLives = function(){
 
 function draw()
 {
-    brush.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+    brush.clearRect(0, 0, gameCanvas.width, gameCanvas.height); 
     drawBall();
+    changeSpeed();
     drawPaddle();
     drawBricks();
     drawScore();
@@ -234,6 +248,8 @@ function draw()
     bounceBall();
     collisionDetection();
     movePaddle();
+    get_random_color();
+    
 }
 
 function changeSpeed(){
@@ -249,3 +265,12 @@ function gameStart(){
     setInterval(draw, 10);
     document.removeEventListener('keydown', gameStart, false);
 }
+
+setInterval(get_random_color, 50000);
+
+
+function get_random_color()
+{
+  defaultColor = ['red','orange','yellow','green','blue','purple'][Math.random()*6|0];
+}
+
