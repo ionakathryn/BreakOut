@@ -6,7 +6,6 @@ var gameCanvas = document.getElementById("gameCanvas");
 var brush = gameCanvas.getContext("2d");
 
 brush.fillStyle = "#FF0000";
-brush.strokeStyle="#purple";
 
 // Bricks information
 var brickRowCount = 3;
